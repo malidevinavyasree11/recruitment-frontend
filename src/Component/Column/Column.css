@@ -33,10 +33,11 @@
     right: 20px;
 }
 .dropdown-menu .reset{
-    background-color:#0070AD;
+    background-color:transparent;
     border:1px solid;
-    color:#ddd;
+    color:#0070AD;
     border-radius: 8px;
     width:50px;
     height: 40px;
+    cursor: pointer;
 }

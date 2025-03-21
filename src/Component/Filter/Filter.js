@@ -24,7 +24,7 @@ const Filter = ({ closeColumnDropdown }) => {
     setIsFilterModalOpen((prev) => !prev);
     closeColumnDropdown();
   };
-  const toggleFilterDropdown = () => {
+  const toggleFilterDropdown = () => { 
     setIsFilterDropdownOpen((prev) => !prev);
     if (!isFilterDropdownOpen) {
       toggleFilterModal();
@@ -74,6 +74,7 @@ const Filter = ({ closeColumnDropdown }) => {
                 <select name="Account" value={selectedFilters.Account} onChange={handleFilterChange}>
                   <option value="">Account</option>
                   <option value="Ibm">Ibm</option>
+                  <option value="Microsoft">Microsoft</option>
                 </select>
               </div>
               <div className="filter-row">
@@ -92,9 +93,9 @@ const Filter = ({ closeColumnDropdown }) => {
               <div className="filter-row">
                 <select name="Skills" value={selectedFilters.Skills} onChange={handleFilterChange}>
                   <option value="">Skills</option>
-                  <option value="javascript">javascript</option>
-                  <option value="Html">Html</option>
-                  <option value="Css">Css</option>
+                  <option value="PHP Java Developer">PHP Java Developer</option>
+                  <option value="Cloud ISL DevOps">Cloud ISL DevOps</option>
+                  <option value="Azure Data engineer">Azure Data engineer</option>
                   <option value="Reactjs">Reactjs</option>
                 </select>
                 <div className="filter-buttons">
@@ -109,5 +110,4 @@ const Filter = ({ closeColumnDropdown }) => {
     </div>
   );
 };
-
 export default Filter;

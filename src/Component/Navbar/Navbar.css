@@ -1,22 +1,19 @@
 
 .sidebar {
-    width: 150px;
-    background-color: var(--side-nav-background);
-    padding: 20px;
-    color: #ccc;
-    height: 630px;
-}
-.sidebar h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #007BFF;
+    width: 140px;
+    background-color: #f2f2f2;
+    padding: 14px;
+    color:#0070AD;
+    height:auto;
+    margin-top: 10px;
 }
 .sidebar p {
-    font-size: 18px;
-    margin: 10px 0;
+    font-size: 15px;
+    margin-top: 10px;
     cursor: pointer;
     margin-bottom: 20px;
-    color: #ccc;
+    color:black;
+    margin-left: 8px;
 }
 .sidebar p:hover {
     color: #0070AD;
@@ -31,4 +28,17 @@ a:hover, .sidebar a:hover {
 }
 .sidebar a:hover {
     color: #0070AD;
+}
+.logo {
+    width: 140px;
+    height: auto;
+    margin-right: 10px; 
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+.sidebar .capgemini{
+  color:#0070AD;
+}
+.capgemini{
+    font-style:italic;
 }

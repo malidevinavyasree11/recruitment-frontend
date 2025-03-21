@@ -11,7 +11,7 @@ const UploadExcelPage = () => {
       setFile(selectedFile);
       setUploadSuccess(false);
       setError(false);
-      console.log("Selected file:", selectedFile);
+      console.log("File is selected", selectedFile);
     }
   };
   const handleFileUpload = () => {
@@ -57,7 +57,7 @@ const UploadExcelPage = () => {
   };
   return (
     <div className="upload-excel-page">
-      <h1>Upload your Document</h1>
+      <h3>Upload your Document</h3>
       <input
         type="file"
         id="file-upload"
