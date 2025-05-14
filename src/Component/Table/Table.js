@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './Table.css';
 import { useReactTable, getCoreRowModel, flexRender, getSortedRowModel, getPaginationRowModel } from '@tanstack/react-table';
-const Table = ({ data, initialColumns, columnVisibility, setColumnVisibility, search }) => {
+const Table = ({ filteredData, initialColumns, columnVisibility, setColumnVisibility, search }) => {
   const [sorting, setSorting] = useState([]);
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns: initialColumns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -13,11 +13,11 @@ const Table = ({ data, initialColumns, columnVisibility, setColumnVisibility, se
       columnVisibility, 
       sorting 
     },
-    globalFilter: search,
+    globalFilter: search,filteredData,
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
   });
-  const { pageIndex, pageSize } = table.getState().pagination;
+  const { pageIndex } = table.getState().pagination;
   return (
     <div className="table-scroll">
       <table className="styled-table">
@@ -44,7 +44,7 @@ const Table = ({ data, initialColumns, columnVisibility, setColumnVisibility, se
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize).map((row) => (
+          {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 columnVisibility[cell.column.id] && (
@@ -58,7 +58,7 @@ const Table = ({ data, initialColumns, columnVisibility, setColumnVisibility, se
         </tbody>
       </table>
       <div className="pagination-controls">
-      <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+        <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
           Previous
         </button>
         <span>

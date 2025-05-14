@@ -8,11 +8,8 @@ import Action from './Component/Action/Action';
 const initialColumns = [
   { header: 'Owner', accessorKey: 'owner' },
   { header: 'Account', accessorKey: 'account' },
-  { header: 'Positions', accessorKey: 'positions' },
-  { header: 'Requirement', accessorKey: 'requirement' },
   { header: 'Grade', accessorKey: 'grade' },
   { header: 'Date', accessorKey: 'date', },
-  { header: 'CandidateId', accessorKey: 'candidateId' },
   { header: 'FullName', accessorKey: 'fullName'},
   { header: 'ContactNo', accessorKey: 'contactNo' },
   { header: 'MailId', accessorKey: 'mailId' },
@@ -24,50 +21,53 @@ const initialColumns = [
   { header: 'RelevantExpYears', accessorKey: 'relevantExpYears' },
   { header: 'CurrentLocation', accessorKey: 'currentLocation' },
   { header: 'PreferredJoiningLocation', accessorKey: 'preferredJoiningLocation' },
-  { header: 'TeamSizeOftheProject', accessorKey: 'teamSizeOftheProject' },
-  { header: 'ExpectedCTC', accessorKey: 'expectedCTC' },
-  { header: 'BUARC', accessorKey: 'BUARC' },
-  { header: 'Hike', accessorKey: 'hike' },
-  { header: 'ARC', accessorKey: 'ARC' },
-  { header: 'ARSSLAB', accessorKey: 'ARSSLAB' },
   { header: 'NoticePeriodDays', accessorKey: 'noticePeriodDays' },
   { header: 'NpRange', accessorKey: 'npRange' },
   { header: 'TentativeDoj', accessorKey: 'tentativeDoj' },
   { header: 'Lwd', accessorKey: 'lwd' },
   { header: 'TentativeJoiningMonth', accessorKey: 'tentativeJoiningMonth' },
-  { header: 'ClientOrganization', accessorKey: 'clientorganization' },
-  { header: 'Gender', accessorKey: 'gender' },
   { header: 'CurrentCompany', accessorKey: 'currentCompany' },
-  { header: 'Currentproject', accessorKey: 'currentproject' },
+  { header: 'Gender', accessorKey: 'gender' },
+  { header: 'TeamSizeOftheProject', accessorKey: 'teamSizeOftheProject' },
   { header: 'Rehire', accessorKey: 'rehire' },
   { header: 'Recruiter', accessorKey: 'recruiter' },
   { header: 'TaLead', accessorKey: 'taLead' },
+  { header: 'Positions', accessorKey: 'positions' },
+  { header: 'Requirement', accessorKey: 'requirement' },
+  { header: 'CandidateId', accessorKey: 'candidateId' },
+  { header: 'BUARC', accessorKey: 'buArc' },
+  { header: 'Hike', accessorKey: 'hike' },
+  { header: 'ARC', accessorKey: 'arc' },
   { header: 'CgScreeningStatus', accessorKey: 'cgScreeningStatus' },
   { header: 'CgScreeningFeedbackDate', accessorKey: 'cgScreeningFeedbackDate' },
   { header: 'CgL1RoundDate', accessorKey: 'cgL1RoundDate' },
   { header: 'CgL1RoundPanel', accessorKey: 'cgL1RoundPanel' },
   { header: 'CgL1RoundResult', accessorKey: 'cgL1RoundResult' },
   { header: 'CgL2RoundDate', accessorKey: 'cgL2RoundDate' },
-  { header: 'CgL2RoundPannel', accessorKey: 'cgL2RoundPannel' },
-  { header: 'CgL2Roundresult', accessorKey: 'cgL2roundresult' },
-  { header: 'ClientSubmissiontype', accessorKey: 'clientSubmissiontype' },
-  {header:'ClientSubmissionDate',accessorKey:'clientSubmissionDate'},
-  {header:'ClientL1InterviewDate',accessorKey:'clientL1InterviewDate'},
-  { header: 'Clientl1interviewResult', accessorKey: 'clientl1InterviewResult' },
+  { header:  'ClientSubmissionDate',accessorKey:'clientSubmissionDate'},
+  { header:'ClientL1InterviewDate',accessorKey:'clientL1InterviewDate'},
   { header: 'Clientl2InterviewDate', accessorKey: 'clientl2InterviewDate' },
-  { header: 'Clientl2InterviewResult', accessorKey: 'clientl2InterviewResult' },
   { header: 'MrRoundDate', accessorKey: 'mrRoundDate' },
-  { header: 'MrRoundResult', accessorKey: 'mrRoundResult' },
   { header: 'FinalStatus', accessorKey: 'finalStatus' },
   { header: 'Hm', accessorKey: 'hm' },
   { header: 'Project', accessorKey: 'project' },
   { header: 'Remarks', accessorKey: 'remarks' },
+  { header: 'CgL2RoundPannel', accessorKey: 'cgL2RoundPannel' },
+  { header: 'CgL2Roundresult', accessorKey: 'cgL2roundresult' },
+  { header: 'CurrentCTC', accessorKey: 'currentCtc'},
+  { header: 'ExpectedCTC', accessorKey: 'expectedCtc' },
+  { header: 'ARCSLAB', accessorKey: 'arcSlab' },
+  { header: 'ClientOrganization', accessorKey: 'clientorganization' },
+  { header: 'Currentproject', accessorKey: 'currentproject' },
+  { header: 'ClientSubmissiontype', accessorKey: 'clientSubmissiontype' },
+  { header: 'Clientl1interviewResult', accessorKey: 'clientL1InterviewResult' },
+  { header: 'Clientl2InterviewResult', accessorKey: 'clientl2InterviewResult' },
+  { header: 'MrRoundResult', accessorKey: 'mrRoundResult' },
   { header: 'Wave', accessorKey: 'wave' },
   { header: '4', accessorKey: '4' },
   { header: '5', accessorKey: '5' },
   { header: '6', accessorKey: '6' },
   { header: 'Category', accessorKey: 'category' },
-  { header: 'TentjoiningMonth', accessorKey: 'tentjoiningMonth' },
   {
     header: "Actions",
     accessorKey: 'Actions',
@@ -90,33 +90,33 @@ const loadColumnVisibility = () => {
 };
 const App = () => {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState(loadColumnVisibility);
   const [isColumnDropdownOpen, setIsColumnDropdownOpen] = useState(false);
   useEffect(() => {
     fetch("https://recruitment-tracker-backend.vercel.app/candidates")
       .then(response => {
-        console.log("sucessful",response)
         if (!response.ok) {
-          console.log('Failed to fetch data');
+          throw new Error('Failed to fetch data');
         }
         return response.json();
       })
       .then(result => {
-        const formattedData = result.map(item => ({
-          ...item,
-          date: new Date(item.date).toDateString(),
-          tentativeDoj: new Date(item.tentativeDoj).toDateString(),
-          cgL1RoundDate: new Date(item.cgL1RoundDate).toDateString(),
-          clientL1InterviewDate:new Date(item.clientL1InterviewDate).toDateString(),
-          clientSubmissionDate:new Date(item.clientSubmissionDate).toDateString()
-        }));
-        console.log("Result",result)
-        setData(formattedData);
-        console.log("Formatted data",formattedData)
+        const data = result.candidates;
+        if (Array.isArray(data)) {
+          const formattedData = data.map(item => ({
+            ...item,
+            date: new Date(item.date).toDateString(),
+            tentativeDoj: new Date(item.tentativeDoj).toDateString(),
+            cgL1RoundDate: new Date(item.cgL1RoundDate).toDateString(),
+            clientL1InterviewDate: new Date(item.clientL1InterviewDate).toDateString(),
+            clientSubmissionDate: new Date(item.clientSubmissionDate).toDateString(),
+          }));
+          setData(formattedData);
+          setFilteredData(formattedData);
+        }
       })
-      .catch(err => {
-        console.log("Error", err);
-      });
+      .catch(err => console.error("Error", err));
   }, []);
   const toggleColumnVisibility = useCallback((columnKey) => {
     setColumnVisibility((prevState) => {
@@ -142,7 +142,7 @@ const App = () => {
       <div className="table-container">
         <div className="dropdown-container">
           <div className='filter-dropdown-wrapper'>
-            <Filter closeColumnDropdown={closeColumnDropdown} />
+            <Filter closeColumnDropdown={closeColumnDropdown} setFilteredData={setFilteredData} data={data}  />
             <button className='column' onClick={() => setIsColumnDropdownOpen(!isColumnDropdownOpen)}>
               ...
             </button>
@@ -157,6 +157,7 @@ const App = () => {
           )}
         </div>
         <Table
+          filteredData={filteredData}
           data={data}
           initialColumns={initialColumns}
           columnVisibility={columnVisibility}
@@ -166,4 +167,4 @@ const App = () => {
     </div>
   );
 };
-export default App;
+export default App

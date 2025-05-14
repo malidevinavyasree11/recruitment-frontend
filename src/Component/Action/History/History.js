@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
+import { formatDatesInObject } from '../../../utils/dateFormat';
 import './History.css';
 const History = () => {
   const location = useLocation();
@@ -12,30 +13,24 @@ const History = () => {
       console.log("rowData", rowData);
       fetch(`https://recruitment-tracker-backend.vercel.app/candidates/${rowData.cId}/history`)
         .then((response) => response.json())
-        .then((data) => {
+        .then((data) => {        
           if (data && data.length) {
-            const formattedData = data.map(item => ({
-              ...item,
-              uploadId: {
-                ...item.uploadId,
-                uploadDate: new Date(item.uploadId.uploadDate).toDateString(),
-              },
-            }));
+            console.log("date", data[0]);
+            const formattedData = formatDatesInObject(data);
             setHistoryData(formattedData);
-            console.log("Formatted data", formattedData);
+            console.log("Formatted data", data);
           } 
         })
         .catch((error) => {
           console.error('Error fetching history data:', error);
         });
     }
-    }, [rowData]);
-    const columns = useMemo(() => {
+  }, [rowData]);    
+  const columns = useMemo(() => {
+    if (!historyData || historyData.length === 0) {
+      return [];
+    }
     const dynamicColumns = [
-      {
-        header: 'Upload Date',
-        accessorKey: 'uploadId.uploadDate',
-      },
       {
         header: 'Changes',
         accessorKey: 'changes',
@@ -43,6 +38,8 @@ const History = () => {
       },
     ];
     const uniqueFields = [];
+    console.log("historyData", historyData);
+    
     historyData.forEach(item => {
       item.changes.forEach(change => {
         if (!uniqueFields.includes(change.field)) {
@@ -51,7 +48,7 @@ const History = () => {
       });
     });
     uniqueFields.forEach(field => {
-      dynamicColumns[1].columns.push({
+      dynamicColumns[0].columns.push({
         header: field,
         accessorKey: field,
         cell: ({ row }) => {
@@ -61,7 +58,7 @@ const History = () => {
       });
     });
     return dynamicColumns;
-  },[historyData]);
+  }, [historyData]);
   const table = useReactTable({
     data: historyData,
     columns,

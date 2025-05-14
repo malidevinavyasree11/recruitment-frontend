@@ -2,12 +2,12 @@
     display: flex;
     border-collapse: collapse;
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 13px;
 }
 .table-container {
     flex-grow: 3;
-    width: 150px;
-    padding: 20px;
+    width: 120px;
+    padding: 10px;
     margin: 30px;
     background-color: #fff;
     border-radius: 20px;
@@ -29,7 +29,7 @@
     background-color: #f2f2f2;
     font-weight:normal;
     color:#428bca;
-    font-size:14px;
+    font-size:13px;
     align-items: center;
     cursor: pointer;
     padding:25px

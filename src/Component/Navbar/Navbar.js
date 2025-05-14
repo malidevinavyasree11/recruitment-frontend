@@ -11,7 +11,7 @@ const Navbar = () => {
       <div>
       <p>Data</p>
       <p>Project wise Data</p>
-      <p>5 days Delta</p>
+      <Link to="/5days"><p>5 days Delta</p></Link>
       <Link to="/upload-excel">
         <p>Upload Excel</p>
       </Link>
